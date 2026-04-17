@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Last Shear Bender · Ottawa Barber</title>
+<meta name="description" content="Premium barber services in Ottawa. Book your next cut in under a minute with The Last Shear Bender." />
+<meta property="og:title" content="The Last Shear Bender · Ottawa's Premium Barber" />
+<meta property="og:description" content="Master the Cut. Bend the Style." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0A0A0A; --panel: #141414; --panel-light: #1C1C1C;
+    --gold: #C8A96E; --gold-dark: #8B6914;
+    --text: #F0EAD6; --muted: #888; --border: #2A2A2A;
+  }
+  body { background: var(--bg); color: var(--text); font-family: 'Playfair Display', Georgia, serif; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  input, textarea { font-family: 'Inter', sans-serif; }
+  ::-webkit-scrollbar { display: none; }
+  input::placeholder, textarea::placeholder { color: #555; }
+  .hidden { display: none !important; }
+
+  /* Buttons */
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--bg); border-radius: 12px; padding: 14px 24px;
+    font-weight: 700; font-size: 0.9rem; letter-spacing: 0.05em;
+    box-shadow: 0 4px 20px rgba(200, 169, 110, 0.3); transition: all 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(200, 169, 110, 0.5); }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .btn-ghost {
+    background: transparent; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 20px;
+    padding: 6px 14px; font-size: 0.75rem; letter-spacing: 0.05em;
+  }
+
+  /* Landing Hero */
+  .hero {
+    padding: 60px 20px 40px;
+    background: radial-gradient(circle at 50% 0%, rgba(200,169,110,0.15) 0%, transparent 60%), var(--bg);
+    text-align: center; border-bottom: 1px solid var(--border); position: relative;
+  }
+  .owner-btn {
+    position: absolute; top: 16px; right: 16px;
+    background: transparent; border: 1px solid var(--border);
+    color: var(--muted); border-radius: 20px; padding: 6px 12px;
+    font-size: 0.7rem; letter-spacing: 0.1em;
+  }
+  .logo-circle {
+    width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 16px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; box-shadow: 0 0 30px rgba(200,169,110,0.4);
+  }
+  .brand-name { color: var(--gold); letter-spacing: 0.4em; font-size: 0.75rem; margin-bottom: 8px; font-weight: 700; }
+  .brand-subtitle { color: var(--muted); letter-spacing: 0.25em; font-size: 0.6rem; margin-bottom: 18px; }
+  .tagline {
+    font-size: clamp(2rem, 7vw, 3.2rem); font-weight: 700;
+    line-height: 1.05; margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--text) 0%, var(--gold) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    font-style: italic;
+  }
+  .hero-desc { color: var(--muted); max-width: 420px; margin: 0 auto 28px; font-size: 0.95rem; line-height: 1.6; }
+  .badges { margin-top: 24px; display: flex; justify-content: center; gap: 20px; color: var(--muted); font-size: 0.8rem; flex-wrap: wrap; }
+
+  /* Services */
+  .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; }
+  .section-label { color: var(--gold); letter-spacing: 0.25em; font-size: 0.7rem; margin-bottom: 8px; text-align: center; }
+  .section-title { font-size: 1.6rem; font-style: italic; text-align: center; margin-bottom: 24px; }
+  .service-card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 14px; padding: 18px; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 14px; position: relative;
+    transition: all 0.2s;
+  }
+  .service-card.popular { border-color: rgba(200,169,110,0.4); }
+  .service-card.selectable { cursor: pointer; width: 100%; text-align: left; }
+  .service-card.selectable:hover { border-color: var(--gold); background: var(--panel-light); }
+  .popular-tag {
+    position: absolute; top: -8px; right: 14px;
+    background: var(--gold); color: var(--bg);
+    font-size: 0.65rem; font-weight: 700; padding: 3px 10px;
+    border-radius: 10px; letter-spacing: 0.1em; font-family: 'Inter', sans-serif;
+  }
+  .service-icon { font-size: 2rem; }
+  .service-info { flex: 1; }
+  .service-name { font-weight: 700; font-size: 1.05rem; }
+  .service-desc { color: var(--muted); font-size: 0.8rem; }
+  .service-duration { color: var(--muted); font-size: 0.75rem; margin-top: 2px; }
+  .service-price { color: var(--gold); font-size: 1.3rem; font-weight: 700; }
+
+  .footer-info { text-align: center; margin-top: 30px; color: var(--muted); font-size: 0.75rem; line-height: 1.8; }
+  .full-btn { width: 100%; margin-top: 20px; }
+
+  /* Booking flow */
+  .booking-container { max-width: 520px; margin: 0 auto; padding: 20px 16px; }
+  .booking-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .step-indicator { color: var(--gold); font-size: 0.7rem; letter-spacing: 0.2em; }
+  .progress-bar { display: flex; gap: 6px; margin-bottom: 28px; }
+  .progress-seg { flex: 1; height: 3px; border-radius: 2px; background: var(--border); transition: all 0.3s; }
+  .progress-seg.active { background: var(--gold); }
+  .step-title { font-size: 1.6rem; font-style: italic; margin-bottom: 6px; }
+  .step-desc { color: var(--muted); margin-bottom: 24px; font-size: 0.9rem; }
+
+  .date-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 20px; }
+  .date-btn {
+    flex-shrink: 0; min-width: 64px;
+    background: var(--panel); color: var(--text);
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 12px 0; transition: all 0.2s;
+  }
+  .date-btn.selected { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+  .date-weekday { font-size: 0.65rem; letter-spacing: 0.1em; opacity: 0.7; }
+  .date-day { font-size: 1.3rem; font-weight: 700; }
+
+  .time-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 24px; }
+  .time-btn {
+    background: var(--panel); color: var(--text);
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 4px; font-size: 0.85rem; font-weight: 600;
+    transition: all 0.2s; font-family: inherit;
+  }
+  .time-btn.selected { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+
+  .form-label { color: var(--gold); font-size: 0.7rem; letter-spacing: 0.15em; margin-bottom: 6px; text-transform: uppercase; }
+  .form-group { margin-bottom: 14px; }
+  .form-input {
+    width: 100%; background: var(--panel); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 14px; color: var(--text);
+    font-size: 0.95rem; outline: none; transition: border-color 0.2s;
+  }
+  .form-input:focus { border-color: var(--gold); }
+  textarea.form-input { resize: none; }
+
+  .summary-card {
+    background: var(--panel); border: 1px solid rgba(200,169,110,0.3);
+    border-radius: 14px; padding: 16px; margin: 20px 0;
+  }
+  .summary-title { color: var(--gold); font-size: 0.7rem; letter-spacing: 0.2em; margin-bottom: 10px; }
+  .row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .row:last-child { border-bottom: none; }
+  .row-label { color: var(--muted); font-size: 0.85rem; }
+  .row-value { color: var(--text); font-size: 0.9rem; font-weight: 500; }
+  .row-value.highlight { color: var(--gold); font-weight: 700; }
+
+  /* Confirmation */
+  .confirm-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .confirm-card { max-width: 500px; width: 100%; text-align: center; }
+  .check-circle {
+    width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 20px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px; color: var(--bg); font-weight: 700;
+    box-shadow: 0 0 40px rgba(200,169,110,0.4);
+    animation: pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .confirm-label { color: var(--gold); letter-spacing: 0.3em; font-size: 0.75rem; margin-bottom: 8px; }
+  .confirm-title { font-size: 2rem; margin-bottom: 8px; }
+  .confirm-sub { color: var(--muted); margin-bottom: 28px; }
+
+  /* Admin */
+  .admin-wrap { padding: 20px 16px; max-width: 700px; margin: 0 auto; }
+  .admin-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+  .stats-card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 14px; padding: 18px; margin-bottom: 16px;
+    display: flex; gap: 20px; flex-wrap: wrap;
+  }
+  .stat-item {}
+  .stat-label { color: var(--muted); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .stat-value { color: var(--gold); font-size: 1.6rem; font-weight: 700; }
+  .booking-item {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px; margin-bottom: 10px;
+  }
+  .booking-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .delete-btn { background: transparent; color: #555; font-size: 1.1rem; padding: 4px; }
+  .delete-btn:hover { color: #ff6b6b; }
+  .empty-state { text-align: center; padding: 40px; color: var(--muted); }
+
+  /* View transitions */
+  .view { animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+// ============ BRAND CONFIG ============
+const BRAND = {
+  name: "The Last Shear Bender",
+  tagline: "Master the Cut, Bend the Style.",
+  subtitle: "Where craftsmanship meets style. Book your next cut in under a minute.",
+  phone: "(647) 327-3196",
+  instagram: "@thelastshearbender",
+  address: "Ottawa, Ontario, Canada",
+};
+
+const SERVICES = [
+  { id: "haircut", name: "Haircut", duration: "1 hr 15 min", price: 45, desc: "Precision cut tailored to your style", icon: "✂️" },
+  { id: "beard", name: "Beard Trim", duration: "30 min", price: 30, desc: "Sharp lineup & beard sculpt", icon: "🧔" },
+  { id: "combo", name: "Haircut + Beard", duration: "1 hr 45 min", price: 65, desc: "The full signature experience", icon: "💈", popular: true },
+  { id: "kids", name: "Kids Cut", duration: "1 hr", price: 32, desc: "For ages 12 & under", icon: "👦" },
+];
+
+const TIME_SLOTS = ["9:00 AM","10:00 AM","11:00 AM","12:00 PM","1:00 PM","2:00 PM","3:00 PM","4:00 PM","5:00 PM","6:00 PM","7:00 PM"];
+const STORAGE_KEY = "tlsb_bookings";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xjgjyeyw";
+const MAKE_WEBHOOK = "https://hook.us2.make.com/44ckeadm2feb154b86c51xfgjb2lbdvv";
+
+// JSONBin: shared booking storage across all devices
+const JSONBIN_KEY = "$2a$10$qVq1nKZr4iNk5QjtdYxeRu9iYQI2WeiRY.sSL2.MW26g/BNAxpHV2";
+const JSONBIN_ID = "69e24678856a68218944d768";
+const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_ID}`;
+
+// Fetch full data blob (bookings + availability settings) from JSONBin
+async function fetchData() {
+  try {
+    const res = await fetch(JSONBIN_URL + "/latest", {
+      headers: { "X-Master-Key": JSONBIN_KEY }
+    });
+    const data = await res.json();
+    const record = data.record || {};
+    return {
+      bookings: record.bookings || [],
+      availability: record.availability || defaultAvailability(),
+    };
+  } catch (e) {
+    console.error("Fetch failed:", e);
+    return { bookings: [], availability: defaultAvailability() };
+  }
+}
+
+function defaultAvailability() {
+  return {
+    weeklyHours: {
+      0: { open: false, start: "9:00 AM", end: "7:00 PM" }, // Sunday
+      1: { open: true,  start: "9:00 AM", end: "7:00 PM" }, // Monday
+      2: { open: true,  start: "9:00 AM", end: "7:00 PM" },
+      3: { open: true,  start: "9:00 AM", end: "7:00 PM" },
+      4: { open: true,  start: "9:00 AM", end: "7:00 PM" },
+      5: { open: true,  start: "9:00 AM", end: "7:00 PM" },
+      6: { open: true,  start: "10:00 AM", end: "6:00 PM" }, // Saturday
+    },
+    blockedDates: [],    // ["2026-04-20", "2026-04-21"]
+    blockedSlots: [],    // [{ date: "2026-04-20", time: "2:00 PM", reason: "Lunch" }]
+  };
+}
+
+async function fetchAllBookings() {
+  const data = await fetchData();
+  return data.bookings;
+}
+
+// Save both bookings and availability back to JSONBin
+async function saveData(bookings, availability) {
+  try {
+    await fetch(JSONBIN_URL, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key": JSONBIN_KEY
+      },
+      body: JSON.stringify({ bookings, availability })
+    });
+    return true;
+  } catch (e) {
+    console.error("Save failed:", e);
+    return false;
+  }
+}
+
+async function saveAllBookings(bookings) {
+  const current = await fetchData();
+  return await saveData(bookings, current.availability);
+}
+
+// Convert "2:00 PM" to minutes since midnight
+function timeToMinutes(timeStr) {
+  const [t, m] = timeStr.split(" ");
+  let [h, min] = t.split(":").map(Number);
+  if (m === "PM" && h !== 12) h += 12;
+  if (m === "AM" && h === 12) h = 0;
+  return h * 60 + (min || 0);
+}
+
+// Get duration of a service in minutes
+function getServiceDurationMinutes(durationStr) {
+  let mins = 0;
+  const hrMatch = durationStr.match(/(\d+)\s*hr/);
+  const minMatch = durationStr.match(/(\d+)\s*min/);
+  if (hrMatch) mins += parseInt(hrMatch[1]) * 60;
+  if (minMatch) mins += parseInt(minMatch[1]);
+  return mins || 60;
+}
+
+// Check if a slot conflicts with existing bookings on a date
+function isSlotBooked(date, timeSlot, serviceDuration, existingBookings) {
+  const newStart = timeToMinutes(timeSlot);
+  const newEnd = newStart + getServiceDurationMinutes(serviceDuration);
+
+  return existingBookings.some(b => {
+    if (b.date !== date) return false;
+    const bookedStart = timeToMinutes(b.time);
+    const bookedEnd = bookedStart + getServiceDurationMinutes(b.service.duration);
+    // Overlap check
+    return newStart < bookedEnd && newEnd > bookedStart;
+  });
+}
+
+// State
+let state = {
+  view: "landing",
+  step: 1,
+  booking: { service: null, date: "", time: "", name: "", phone: "", email: "", notes: "" },
+  confirmed: null,
+  allBookings: [],
+  availability: defaultAvailability(),
+  loadingAvail: false,
+};
+
+// Check if a date is available (day of week is open AND date not blocked)
+function isDateAvailable(dateStr, availability) {
+  if (availability.blockedDates.includes(dateStr)) return false;
+  const dayOfWeek = new Date(dateStr + "T12:00:00").getDay();
+  return availability.weeklyHours[dayOfWeek]?.open !== false;
+}
+
+// Is a specific time slot manually blocked by the owner?
+function isSlotManuallyBlocked(date, time, availability) {
+  return availability.blockedSlots.some(s => s.date === date && s.time === time);
+}
+
+// Is a time slot within operating hours for that day?
+function isSlotInHours(date, time, availability) {
+  const dayOfWeek = new Date(date + "T12:00:00").getDay();
+  const hours = availability.weeklyHours[dayOfWeek];
+  if (!hours || !hours.open) return false;
+  const slotMins = timeToMinutes(time);
+  const startMins = timeToMinutes(hours.start);
+  const endMins = timeToMinutes(hours.end);
+  return slotMins >= startMins && slotMins < endMins;
+}
+
+// Owner auth (simple client-side gate — see note in chat about security limits)
+const OWNER_PASSWORD = "!1Pokemons";
+const AUTH_KEY = "tlsb_owner_auth";
+const isOwnerAuthed = () => {
+  try { return localStorage.getItem(AUTH_KEY) === "1"; } catch(e) { return false; }
+};
+const setOwnerAuthed = () => { try { localStorage.setItem(AUTH_KEY, "1"); } catch(e) {} };
+const clearOwnerAuth = () => { try { localStorage.removeItem(AUTH_KEY); } catch(e) {} };
+
+// Show owner access when URL has ?owner OR already authed (persistent session)
+const URL_HAS_OWNER = new URLSearchParams(window.location.search).has("owner");
+const SHOW_OWNER_ACCESS = URL_HAS_OWNER || isOwnerAuthed();
+
+// Storage (localStorage)
+const loadBookings = () => { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch { return []; } };
+const saveBookings = (list) => localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+
+// Utils
+const getDateOptions = () => {
+  const dates = []; const today = new Date();
+  for (let i = 0; i < 14; i++) {
+    const d = new Date(today); d.setDate(today.getDate() + i);
+    dates.push({
+      value: d.toISOString().split("T")[0],
+      day: d.getDate(),
+      weekday: d.toLocaleDateString("en-US", { weekday: "short" }).toUpperCase(),
+    });
+  }
+  return dates;
+};
+const esc = (s) => String(s || "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+
+// ============ RENDER ============
+function render() {
+  const app = document.getElementById("app");
+  if (state.view === "login") return renderLogin();
+  if (state.view === "admin") {
+    // Protect admin route
+    if (!isOwnerAuthed()) { state.view = "login"; return renderLogin(); }
+    return renderAdmin();
+  }
+  if (state.view === "confirm") return renderConfirm();
+  if (state.view === "book") return renderBook();
+  return renderLanding();
+}
+
+function renderLogin() {
+  document.getElementById("app").innerHTML = `
+    <div class="confirm-wrap view">
+      <div class="confirm-card" style="max-width:400px">
+        <div class="logo-circle" style="margin-bottom:20px">🔒</div>
+        <div class="confirm-label">${esc(BRAND.name.toUpperCase())}</div>
+        <h1 class="confirm-title" style="font-size:1.6rem">Owner Login</h1>
+        <p class="confirm-sub">Enter your password to view bookings</p>
+        <div class="form-group" style="text-align:left;margin-top:20px">
+          <div class="form-label">Password</div>
+          <input id="pw-input" class="form-input" type="password" placeholder="Enter password" autofocus onkeydown="if(event.key==='Enter')tryLogin()" />
+        </div>
+        <div id="login-error" style="color:#ff6b6b;font-size:0.85rem;margin:8px 0 16px;min-height:18px;font-family:'Inter',sans-serif"></div>
+        <button class="btn-primary" style="width:100%;margin-bottom:10px" onclick="tryLogin()">Login</button>
+        <button class="btn-ghost" style="width:100%;padding:12px" onclick="go('landing')">← Back to Site</button>
+      </div>
+    </div>
+  `;
+  setTimeout(() => document.getElementById("pw-input")?.focus(), 100);
+}
+
+function tryLogin() {
+  const input = document.getElementById("pw-input");
+  const err = document.getElementById("login-error");
+  if (!input) return;
+  if (input.value === OWNER_PASSWORD) {
+    setOwnerAuthed();
+    state.view = "admin";
+    render();
+  } else {
+    err.textContent = "Wrong password. Try again.";
+    input.value = "";
+    const card = input.closest(".confirm-card");
+    if (card) { card.style.animation = "shake 0.4s"; setTimeout(() => card.style.animation = "", 400); }
+    input.focus();
+  }
+}
+
+function logout() {
+  if (!confirm("Log out of owner dashboard?")) return;
+  clearOwnerAuth();
+  state.view = "landing";
+  // Clean URL to remove ?owner
+  if (window.history.replaceState) {
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+  location.reload();
+}
+
+function renderLanding() {
+  document.getElementById("app").innerHTML = `
+    <div class="view">
+      <div class="hero">
+        ${SHOW_OWNER_ACCESS ? (isOwnerAuthed() 
+          ? `<button class="owner-btn" onclick="go('admin')">⚙️ DASHBOARD</button>`
+          : `<button class="owner-btn" onclick="go('login')">🔒 OWNER LOGIN</button>`
+        ) : ''}
+        <div class="logo-circle">💈</div>
+        <div class="brand-name">${esc(BRAND.name.toUpperCase())}</div>
+        <div class="brand-subtitle">PREMIUM BARBER SERVICES</div>
+        <h1 class="tagline">${esc(BRAND.tagline.split(",")[0])},<br/>${esc(BRAND.tagline.split(",")[1])}</h1>
+        <p class="hero-desc">${esc(BRAND.subtitle)}</p>
+        <button class="btn-primary" onclick="go('book')" style="padding:16px 32px">Book Your Appointment →</button>
+        <div class="badges">
+          <span>⭐ 5.0 Rated</span>
+          <span>✂️ Master Barber</span>
+          <span>💈 ${esc(BRAND.instagram)}</span>
+        </div>
+      </div>
+      <div class="container">
+        <div class="section-label">THE MENU</div>
+        <h2 class="section-title">Services & Pricing</h2>
+        ${SERVICES.map(s => `
+          <div class="service-card ${s.popular ? 'popular' : ''}">
+            ${s.popular ? '<div class="popular-tag">MOST BOOKED</div>' : ''}
+            <div class="service-icon">${s.icon}</div>
+            <div class="service-info">
+              <div class="service-name">${esc(s.name)}</div>
+              <div class="service-desc">${esc(s.desc)}</div>
+              <div class="service-duration">⏱ ${esc(s.duration)}</div>
+            </div>
+            <div class="service-price">$${s.price}</div>
+          </div>
+        `).join("")}
+        <button class="btn-primary full-btn" onclick="go('book')">Reserve Your Spot →</button>
+        <div class="footer-info">
+          <div>📍 ${esc(BRAND.address)}</div>
+          <div>📞 ${esc(BRAND.phone)}</div>
+          <div>📸 ${esc(BRAND.instagram)}</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderBook() {
+  const b = state.booking;
+  document.getElementById("app").innerHTML = `
+    <div class="booking-container view">
+      <div class="booking-header">
+        <button class="btn-ghost" onclick="backStep()">← Back</button>
+        <div class="step-indicator">${esc(BRAND.name.toUpperCase())} · STEP ${state.step}/3</div>
+      </div>
+      <div class="progress-bar">
+        ${[1,2,3].map(n => `<div class="progress-seg ${n <= state.step ? 'active' : ''}"></div>`).join("")}
+      </div>
+      ${state.step === 1 ? renderStep1() : state.step === 2 ? renderStep2() : renderStep3()}
+    </div>
+  `;
+}
+
+function renderStep1() {
+  return `
+    <h2 class="step-title">Select Service</h2>
+    <p class="step-desc">Choose what you're getting done</p>
+    ${SERVICES.map(s => `
+      <button class="service-card selectable" onclick='selectService(${JSON.stringify(s).replace(/'/g,"&apos;")})'>
+        <div class="service-icon">${s.icon}</div>
+        <div class="service-info">
+          <div class="service-name">${esc(s.name)}</div>
+          <div class="service-duration">⏱ ${esc(s.duration)}</div>
+        </div>
+        <div class="service-price">$${s.price}</div>
+      </button>
+    `).join("")}
+  `;
+}
+
+function renderStep2() {
+  const b = state.booking;
+  const dates = getDateOptions();
+  const duration = b.service.duration;
+  const bookingsForDate = b.date ? state.allBookings.filter(bk => bk.date === b.date) : [];
+  const avail = state.availability;
+
+  return `
+    <h2 class="step-title">Pick a Date & Time</h2>
+    <p class="step-desc">${esc(b.service.name)} · ${esc(b.service.duration)}</p>
+    <div class="form-label">Date</div>
+    <div class="date-scroll">
+      ${dates.map(d => {
+        const unavailable = !isDateAvailable(d.value, avail);
+        if (unavailable) {
+          return `<button class="date-btn" style="opacity:0.3;cursor:not-allowed;text-decoration:line-through" disabled><div class="date-weekday">${d.weekday}</div><div class="date-day">${d.day}</div></button>`;
+        }
+        return `<button class="date-btn ${b.date === d.value ? 'selected' : ''}" onclick="selectDate('${d.value}')"><div class="date-weekday">${d.weekday}</div><div class="date-day">${d.day}</div></button>`;
+      }).join("")}
+    </div>
+    ${b.date ? (state.loadingAvail ? `
+      <div style="text-align:center;padding:24px;color:var(--muted);font-size:0.9rem">
+        <div style="display:inline-block;width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;vertical-align:middle;margin-right:8px"></div>
+        Checking availability...
+      </div>
+    ` : (() => {
+      // Build available time slots for this day
+      const availableSlots = TIME_SLOTS.filter(t => isSlotInHours(b.date, t, avail));
+      if (availableSlots.length === 0) {
+        return `<div style="text-align:center;padding:16px;color:var(--muted);font-size:0.85rem;background:var(--panel);border-radius:10px;margin-bottom:16px">🚫 Shop closed this day.</div>`;
+      }
+      const allBlocked = availableSlots.every(t =>
+        isSlotBooked(b.date, t, duration, bookingsForDate) ||
+        isSlotManuallyBlocked(b.date, t, avail)
+      );
+      return `
+        <div class="form-label">Time</div>
+        <div class="time-grid">
+          ${availableSlots.map(t => {
+            const booked = isSlotBooked(b.date, t, duration, bookingsForDate);
+            const blocked = isSlotManuallyBlocked(b.date, t, avail);
+            if (booked || blocked) {
+              return `<button class="time-btn" style="opacity:0.3;text-decoration:line-through;cursor:not-allowed" disabled>${t}</button>`;
+            }
+            return `<button class="time-btn ${b.time === t ? 'selected' : ''}" onclick="selectTime('${t}')">${t}</button>`;
+          }).join("")}
+        </div>
+        ${allBlocked ? `
+          <div style="text-align:center;padding:16px;color:var(--muted);font-size:0.85rem;background:var(--panel);border-radius:10px;margin-bottom:16px">
+            😔 Fully booked this day. Try another date.
+          </div>
+        ` : ''}
+      `;
+    })()) : ''}
+    <button class="btn-primary full-btn" onclick="nextStep()" ${(!b.date || !b.time) ? 'disabled' : ''}>Continue →</button>
+  `;
+}
+
+function renderStep3() {
+  const b = state.booking;
+  const dateStr = b.date ? new Date(b.date).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }) : '';
+  const emailValid = b.email.trim() === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email.trim());
+  const canSubmit = b.name.trim().length > 0 && b.phone.trim().length > 0 && b.email.trim().length > 0 && emailValid;
+  return `
+    <h2 class="step-title">Your Details</h2>
+    <p class="step-desc">Just a few things to lock it in</p>
+    <div class="form-group">
+      <div class="form-label">Full Name</div>
+      <input id="in-name" class="form-input" placeholder="John Doe" value="${esc(b.name)}" oninput="updateFieldLive('name', this.value)" autocomplete="name" />
+    </div>
+    <div class="form-group">
+      <div class="form-label">Phone Number</div>
+      <input id="in-phone" class="form-input" type="tel" placeholder="(613) 555-0123" value="${esc(b.phone)}" oninput="updateFieldLive('phone', this.value)" autocomplete="tel" />
+    </div>
+    <div class="form-group">
+      <div class="form-label">Email</div>
+      <input id="in-email" class="form-input" type="email" placeholder="you@email.com" value="${esc(b.email)}" oninput="updateFieldLive('email', this.value)" autocomplete="email" autocapitalize="none" />
+      ${!emailValid && b.email.trim().length > 0 ? `<div style="color:#ff6b6b;font-size:0.75rem;margin-top:4px;font-family:'Inter',sans-serif">Please enter a valid email</div>` : ''}
+    </div>
+    <div class="form-group">
+      <div class="form-label">Notes (optional)</div>
+      <textarea class="form-input" rows="2" placeholder="Any specific requests..." oninput="updateField('notes', this.value)">${esc(b.notes)}</textarea>
+    </div>
+    <div class="summary-card">
+      <div class="summary-title">BOOKING SUMMARY</div>
+      <div class="row"><span class="row-label">Service</span><span class="row-value">${esc(b.service.name)}</span></div>
+      <div class="row"><span class="row-label">Date</span><span class="row-value">${esc(dateStr)}</span></div>
+      <div class="row"><span class="row-label">Time</span><span class="row-value">${esc(b.time)}</span></div>
+      <div class="row"><span class="row-label">Total</span><span class="row-value highlight">$${b.service.price}</span></div>
+    </div>
+    <button id="confirm-btn" class="btn-primary full-btn" onclick="submitBooking()" ${canSubmit ? '' : 'disabled'}>Confirm Booking ✓</button>
+  `;
+}
+
+function renderConfirm() {
+  const b = state.confirmed;
+  const dateStr = new Date(b.date).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+  document.getElementById("app").innerHTML = `
+    <div class="confirm-wrap view">
+      <div class="confirm-card">
+        <div class="check-circle">✓</div>
+        <div class="confirm-label">CONFIRMED AT ${esc(BRAND.name.toUpperCase())}</div>
+        <h1 class="confirm-title">You're Booked</h1>
+        <p class="confirm-sub">See you soon, ${esc(b.name.split(" ")[0])}!</p>
+        <div class="summary-card" style="text-align:left">
+          <div class="row"><span class="row-label">Service</span><span class="row-value">${esc(b.service.name)}</span></div>
+          <div class="row"><span class="row-label">Date</span><span class="row-value">${esc(dateStr)}</span></div>
+          <div class="row"><span class="row-label">Time</span><span class="row-value">${esc(b.time)}</span></div>
+          <div class="row"><span class="row-label">Total</span><span class="row-value highlight">$${b.service.price}</span></div>
+        </div>
+        <p style="color:var(--muted);font-size:0.8rem;margin-bottom:20px">📍 ${esc(BRAND.address)} · We'll text you a reminder</p>
+        <button class="btn-primary" style="width:100%;margin-bottom:10px" onclick="addToCalendar()">📅 Add to Calendar</button>
+        <button class="btn-ghost" style="width:100%;padding:12px" onclick="resetAll()">Book Another Appointment</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderAdmin() {
+  // Async load from JSONBin, show loading state first
+  if (!state.adminLoaded) {
+    document.getElementById("app").innerHTML = `
+      <div class="admin-wrap view" style="text-align:center;padding-top:60px">
+        <div style="color:var(--muted);font-size:0.9rem">
+          <div style="display:inline-block;width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;vertical-align:middle;margin-right:10px"></div>
+          Loading...
+        </div>
+      </div>
+    `;
+    fetchData().then(data => {
+      state.allBookings = data.bookings;
+      state.availability = data.availability;
+      state.adminLoaded = true;
+      render();
+    });
+    return;
+  }
+
+  const tab = state.adminTab || "bookings";
+  const bookings = state.allBookings;
+  const totalRevenue = bookings.reduce((s, b) => s + (b.service?.price || 0), 0);
+  const thisWeek = bookings.filter(b => {
+    const d = new Date(b.date); const diff = (d - new Date()) / 86400000;
+    return diff >= -1 && diff <= 7;
+  }).length;
+
+  document.getElementById("app").innerHTML = `
+    <div class="admin-wrap view">
+      <div class="admin-header">
+        <div>
+          <div style="color:var(--gold);font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase">${esc(BRAND.name)} · Dashboard</div>
+          <div style="font-size:1.6rem;font-weight:700">Owner Control</div>
+        </div>
+        <div style="display:flex;gap:6px">
+          <button class="btn-ghost" onclick="refreshAdmin()">🔄</button>
+          <button class="btn-ghost" onclick="go('landing')">← Home</button>
+          <button class="btn-ghost" onclick="logout()" style="border-color:#4a2020;color:#ff6b6b">Logout</button>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:6px;margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:0">
+        <button onclick="setAdminTab('bookings')" style="background:transparent;border:none;color:${tab === 'bookings' ? 'var(--gold)' : 'var(--muted)'};padding:10px 4px;font-size:0.85rem;font-weight:700;cursor:pointer;border-bottom:2px solid ${tab === 'bookings' ? 'var(--gold)' : 'transparent'};letter-spacing:0.1em;font-family:inherit">📅 BOOKINGS</button>
+        <button onclick="setAdminTab('availability')" style="background:transparent;border:none;color:${tab === 'availability' ? 'var(--gold)' : 'var(--muted)'};padding:10px 4px;font-size:0.85rem;font-weight:700;cursor:pointer;border-bottom:2px solid ${tab === 'availability' ? 'var(--gold)' : 'transparent'};letter-spacing:0.1em;font-family:inherit">⏰ AVAILABILITY</button>
+      </div>
+
+      ${tab === 'bookings' ? `
+        <div class="stats-card">
+          <div class="stat-item"><div class="stat-label">Total</div><div class="stat-value">${bookings.length}</div></div>
+          <div class="stat-item"><div class="stat-label">This Week</div><div class="stat-value">${thisWeek}</div></div>
+          <div class="stat-item"><div class="stat-label">Revenue</div><div class="stat-value">$${totalRevenue}</div></div>
+        </div>
+        ${bookings.length === 0 ? `
+          <div class="empty-state">No bookings yet. Share your page! 💈</div>
+        ` : bookings.slice().sort((a,b) => new Date(a.date + "T" + convertTo24(a.time)) - new Date(b.date + "T" + convertTo24(b.time))).map(b => `
+          <div class="booking-item">
+            <div class="booking-top">
+              <div>
+                <div style="font-weight:700;font-size:1.05rem">${esc(b.name)}</div>
+                <div style="color:var(--gold);font-size:0.85rem">${esc(b.service?.name)} · $${b.service?.price}</div>
+              </div>
+              <button class="delete-btn" onclick="deleteBooking('${esc(b.id)}')">✕</button>
+            </div>
+            <div style="font-size:0.85rem;color:var(--muted);margin-bottom:6px">📅 ${esc(new Date(b.date).toLocaleDateString("en-US", { weekday:"short", month:"short", day:"numeric" }))} · ⏰ ${esc(b.time)}</div>
+            <div style="font-size:0.85rem;color:var(--muted)">📞 ${esc(b.phone)}${b.email ? ` · ✉️ ${esc(b.email)}` : ''}</div>
+            ${b.notes ? `<div style="font-size:0.8rem;color:var(--muted);margin-top:6px;font-style:italic">"${esc(b.notes)}"</div>` : ''}
+          </div>
+        `).join("")}
+      ` : renderAvailabilityTab()}
+    </div>
+  `;
+}
+
+function renderAvailabilityTab() {
+  const a = state.availability;
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const upcoming = getDateOptions().slice(0, 14);
+  return `
+    <div style="margin-bottom:24px">
+      <div style="color:var(--gold);font-size:0.7rem;letter-spacing:0.2em;margin-bottom:10px">WEEKLY HOURS</div>
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px">
+        ${days.map((name, i) => {
+          const h = a.weeklyHours[i];
+          return `
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:${i < 6 ? '1px solid var(--border)' : 'none'}">
+              <div style="width:40px;font-weight:700;color:${h.open ? 'var(--text)' : 'var(--muted)'}">${name}</div>
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none">
+                <input type="checkbox" ${h.open ? 'checked' : ''} onchange="toggleDayOpen(${i}, this.checked)" style="accent-color:var(--gold);cursor:pointer" />
+                <span style="color:var(--muted);font-size:0.8rem">${h.open ? 'Open' : 'Closed'}</span>
+              </label>
+              ${h.open ? `
+                <select onchange="setDayStart(${i}, this.value)" style="flex:1;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px;font-size:0.8rem;font-family:inherit">
+                  ${TIME_SLOTS.map(t => `<option value="${t}" ${h.start === t ? 'selected' : ''}>${t}</option>`).join('')}
+                </select>
+                <span style="color:var(--muted);font-size:0.8rem">to</span>
+                <select onchange="setDayEnd(${i}, this.value)" style="flex:1;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px;font-size:0.8rem;font-family:inherit">
+                  ${TIME_SLOTS.map(t => `<option value="${t}" ${h.end === t ? 'selected' : ''}>${t}</option>`).join('')}
+                </select>
+              ` : ''}
+            </div>
+          `;
+        }).join("")}
+      </div>
+    </div>
+
+    <div style="margin-bottom:24px">
+      <div style="color:var(--gold);font-size:0.7rem;letter-spacing:0.2em;margin-bottom:10px">BLOCK ENTIRE DAYS (VACATION, CLOSED)</div>
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px">
+        <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:10px">
+          ${upcoming.map(d => {
+            const blocked = a.blockedDates.includes(d.value);
+            return `<button onclick="toggleDateBlock('${d.value}')" style="flex-shrink:0;min-width:60px;background:${blocked ? '#ff6b6b33' : 'var(--bg)'};border:1px solid ${blocked ? '#ff6b6b88' : 'var(--border)'};border-radius:10px;padding:10px 0;cursor:pointer;font-family:inherit;color:${blocked ? '#ff6b6b' : 'var(--text)'}">
+              <div style="font-size:0.6rem;letter-spacing:0.1em;opacity:0.7">${d.weekday}</div>
+              <div style="font-size:1.1rem;font-weight:700">${d.day}</div>
+              ${blocked ? '<div style="font-size:0.6rem;margin-top:2px">BLOCKED</div>' : ''}
+            </button>`;
+          }).join("")}
+        </div>
+        <div style="color:var(--muted);font-size:0.75rem;font-family:'Inter',sans-serif">Tap a date to block/unblock it</div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:24px">
+      <div style="color:var(--gold);font-size:0.7rem;letter-spacing:0.2em;margin-bottom:10px">BLOCK SPECIFIC TIME SLOTS (LUNCH, APPOINTMENTS)</div>
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px">
+        <div style="margin-bottom:10px">
+          <select id="block-date" style="width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:10px;font-size:0.85rem;font-family:inherit;margin-bottom:8px">
+            <option value="">Pick a date...</option>
+            ${upcoming.map(d => `<option value="${d.value}">${d.weekday} ${d.day} (${new Date(d.value + "T12:00:00").toLocaleDateString("en-US", { month: "short" })})</option>`).join("")}
+          </select>
+          <select id="block-time" style="width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:10px;font-size:0.85rem;font-family:inherit;margin-bottom:8px">
+            <option value="">Pick a time...</option>
+            ${TIME_SLOTS.map(t => `<option value="${t}">${t}</option>`).join("")}
+          </select>
+          <input id="block-reason" placeholder="Reason (optional, e.g. Lunch)" style="width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:10px;font-size:0.85rem;font-family:inherit;margin-bottom:8px" />
+          <button class="btn-primary" style="width:100%" onclick="addBlockedSlot()">Block This Slot</button>
+        </div>
+        ${a.blockedSlots.length > 0 ? `
+          <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
+            <div style="color:var(--muted);font-size:0.7rem;letter-spacing:0.1em;margin-bottom:8px">CURRENTLY BLOCKED</div>
+            ${a.blockedSlots.slice().sort((x,y) => (x.date + x.time).localeCompare(y.date + y.time)).map((s, idx) => `
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.85rem">
+                <div>
+                  <div style="color:var(--text);font-weight:600">${esc(new Date(s.date + "T12:00:00").toLocaleDateString("en-US", { weekday:"short", month:"short", day:"numeric" }))} · ${esc(s.time)}</div>
+                  ${s.reason ? `<div style="color:var(--muted);font-size:0.75rem;font-style:italic">${esc(s.reason)}</div>` : ''}
+                </div>
+                <button onclick="removeBlockedSlot(${idx})" style="background:transparent;border:none;color:#ff6b6b;cursor:pointer;font-size:1.1rem;padding:4px 8px">✕</button>
+              </div>
+            `).join("")}
+          </div>
+        ` : ''}
+      </div>
+    </div>
+
+    <div style="color:var(--muted);font-size:0.75rem;text-align:center;padding:10px;font-family:'Inter',sans-serif">
+      💾 Changes save automatically to the cloud
+    </div>
+  `;
+}
+
+function setAdminTab(tab) {
+  state.adminTab = tab;
+  render();
+}
+
+function convertTo24(timeStr) {
+  const [t, m] = timeStr.split(" ");
+  let [h, min] = t.split(":").map(Number);
+  if (m === "PM" && h !== 12) h += 12;
+  if (m === "AM" && h === 12) h = 0;
+  return String(h).padStart(2, "0") + ":" + String(min || 0).padStart(2, "0") + ":00";
+}
+
+function refreshAdmin() {
+  state.adminLoaded = false;
+  render();
+}
+
+// Availability management functions
+async function saveAvailability() {
+  await saveData(state.allBookings, state.availability);
+}
+
+async function toggleDayOpen(dayIdx, isOpen) {
+  state.availability.weeklyHours[dayIdx].open = isOpen;
+  render();
+  await saveAvailability();
+}
+
+async function setDayStart(dayIdx, value) {
+  state.availability.weeklyHours[dayIdx].start = value;
+  await saveAvailability();
+}
+
+async function setDayEnd(dayIdx, value) {
+  state.availability.weeklyHours[dayIdx].end = value;
+  await saveAvailability();
+}
+
+async function toggleDateBlock(dateStr) {
+  const blocked = state.availability.blockedDates.includes(dateStr);
+  if (blocked) {
+    state.availability.blockedDates = state.availability.blockedDates.filter(d => d !== dateStr);
+  } else {
+    state.availability.blockedDates.push(dateStr);
+  }
+  render();
+  await saveAvailability();
+}
+
+async function addBlockedSlot() {
+  const date = document.getElementById("block-date")?.value;
+  const time = document.getElementById("block-time")?.value;
+  const reason = document.getElementById("block-reason")?.value || "";
+  if (!date || !time) { alert("Please pick both a date and a time"); return; }
+
+  // Prevent duplicates
+  const exists = state.availability.blockedSlots.some(s => s.date === date && s.time === time);
+  if (exists) { alert("That slot is already blocked"); return; }
+
+  state.availability.blockedSlots.push({ date, time, reason });
+  render();
+  await saveAvailability();
+}
+
+async function removeBlockedSlot(idx) {
+  const sorted = state.availability.blockedSlots.slice().sort((x,y) => (x.date + x.time).localeCompare(y.date + y.time));
+  const toRemove = sorted[idx];
+  state.availability.blockedSlots = state.availability.blockedSlots.filter(s => !(s.date === toRemove.date && s.time === toRemove.time));
+  render();
+  await saveAvailability();
+}
+
+// ============ ACTIONS ============
+function go(view) { state.view = view; if (view === "landing") { state.step = 1; } render(); window.scrollTo(0, 0); }
+async function selectService(s) {
+  state.booking.service = s;
+  state.step = 2;
+  state.loadingAvail = true;
+  render();
+  const data = await fetchData();
+  state.allBookings = data.bookings;
+  state.availability = data.availability;
+  state.loadingAvail = false;
+  render();
+}
+function selectDate(d) {
+  state.booking.date = d;
+  state.booking.time = ""; // reset time when date changes
+  render();
+}
+function selectTime(t) { state.booking.time = t; render(); }
+function updateField(f, v) { state.booking[f] = v; }
+function updateFieldLive(f, v) {
+  state.booking[f] = v;
+  const btn = document.getElementById('confirm-btn');
+  if (btn) {
+    const b = state.booking;
+    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email.trim());
+    const canSubmit = b.name.trim().length > 0 && b.phone.trim().length > 0 && b.email.trim().length > 0 && emailValid;
+    btn.disabled = !canSubmit;
+  }
+  // If email field just became valid/invalid, trigger re-render to show/hide error
+  if (f === 'email') {
+    const errDiv = document.querySelector('#in-email + div');
+    const emailValid = v.trim() === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+    if (!emailValid && v.trim().length > 0 && !errDiv) {
+      const input = document.getElementById('in-email');
+      const div = document.createElement('div');
+      div.style.cssText = "color:#ff6b6b;font-size:0.75rem;margin-top:4px;font-family:'Inter',sans-serif";
+      div.textContent = "Please enter a valid email";
+      input.parentNode.insertBefore(div, input.nextSibling);
+    } else if (emailValid && errDiv) {
+      errDiv.remove();
+    }
+  }
+}
+function nextStep() { if (state.step < 3) { state.step++; render(); } }
+function backStep() { if (state.step > 1) { state.step--; render(); } else { go("landing"); } }
+async function submitBooking() {
+  const btn = document.getElementById('confirm-btn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Booking...'; }
+
+  // FINAL conflict check (race condition protection)
+  const latestData = await fetchData();
+  state.availability = latestData.availability;
+  const latest = latestData.bookings;
+  const conflict = isSlotBooked(
+    state.booking.date,
+    state.booking.time,
+    state.booking.service.duration,
+    latest.filter(b => b.date === state.booking.date)
+  );
+  const manualBlock = isSlotManuallyBlocked(state.booking.date, state.booking.time, latestData.availability);
+  const dateBlocked = !isDateAvailable(state.booking.date, latestData.availability);
+  if (conflict || manualBlock || dateBlocked) {
+    alert("Sorry! This slot is no longer available. Please pick a different time.");
+    state.allBookings = latest;
+    state.booking.time = "";
+    state.step = 2;
+    render();
+    return;
+  }
+
+  const newBooking = { id: "b_" + Date.now(), ...state.booking, createdAt: new Date().toISOString(), status: "confirmed" };
+
+  // Save to JSONBin (shared across all clients) — THIS is the critical step
+  const updatedBookings = [...latest, newBooking];
+  const saved = await saveData(updatedBookings, state.availability);
+  if (!saved) {
+    alert("Connection issue. Please try again.");
+    if (btn) { btn.disabled = false; btn.textContent = 'Confirm Booking ✓'; }
+    return;
+  }
+  state.allBookings = updatedBookings;
+
+  // Also save locally as backup
+  const list = loadBookings(); list.push(newBooking); saveBookings(list);
+
+  // Send notification to owner via Formspree
+  try {
+    const dateStr = new Date(newBooking.date).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+
+    // Calculate start/end ISO timestamps for Google Calendar sync via Zapier
+    const durStr = newBooking.service.duration;
+    let mins = 60;
+    const hrMatch = durStr.match(/(\d+)\s*hr/);
+    const minMatch = durStr.match(/(\d+)\s*min/);
+    if (hrMatch) mins = parseInt(hrMatch[1]) * 60;
+    if (minMatch) mins += parseInt(minMatch[1]);
+    const [timeStr, meridiem] = newBooking.time.split(" ");
+    let [hours, minutes] = timeStr.split(":").map(Number);
+    if (meridiem === "PM" && hours !== 12) hours += 12;
+    if (meridiem === "AM" && hours === 12) hours = 0;
+    const startDate = new Date(newBooking.date + "T00:00:00");
+    startDate.setHours(hours, minutes, 0, 0);
+    const endDate = new Date(startDate.getTime() + mins * 60000);
+
+    await fetch(FORMSPREE_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        _subject: `🔥 New Booking: ${newBooking.name} - ${newBooking.service.name}`,
+        "Client Name": newBooking.name,
+        "Phone": newBooking.phone,
+        "Email": newBooking.email,
+        "Service": `${newBooking.service.name} ($${newBooking.service.price})`,
+        "Date": dateStr,
+        "Time": newBooking.time,
+        "Duration": newBooking.service.duration,
+        "Notes": newBooking.notes || "(none)",
+        "Start ISO": startDate.toISOString(),
+        "End ISO": endDate.toISOString(),
+        "Booked At": new Date(newBooking.createdAt).toLocaleString("en-US"),
+      }),
+    });
+
+    // Build a Google Calendar "Add Event" URL clients can tap to save
+    const gcalFmt = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+    const gcalTitle = encodeURIComponent(`✂️ ${newBooking.service.name} at ${BRAND.name}`);
+    const gcalDetails = encodeURIComponent(`Service: ${newBooking.service.name}\nPrice: $${newBooking.service.price}\nBooked under: ${newBooking.name}\nPhone: ${BRAND.phone}\nInstagram: ${BRAND.instagram}`);
+    const gcalLocation = encodeURIComponent(BRAND.address);
+    const gcalUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${gcalTitle}&dates=${gcalFmt(startDate)}/${gcalFmt(endDate)}&details=${gcalDetails}&location=${gcalLocation}`;
+
+    // Also send to Make.com webhook for Google Calendar sync + client confirmation email
+    await fetch(MAKE_WEBHOOK, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        clientName: newBooking.name,
+        clientPhone: newBooking.phone,
+        clientEmail: newBooking.email,
+        serviceName: newBooking.service.name,
+        servicePrice: newBooking.service.price,
+        serviceDuration: newBooking.service.duration,
+        dateFormatted: dateStr,
+        time: newBooking.time,
+        notes: newBooking.notes || "",
+        startISO: startDate.toISOString(),
+        endISO: endDate.toISOString(),
+        eventTitle: `✂️ ${newBooking.name} — ${newBooking.service.name}`,
+        eventDescription: `Client: ${newBooking.name}\nPhone: ${newBooking.phone}\nEmail: ${newBooking.email}\nService: ${newBooking.service.name} ($${newBooking.service.price})\nNotes: ${newBooking.notes || "none"}`,
+        location: BRAND.address,
+        addToCalendarLink: gcalUrl,
+        emailSubject: `✂️ Your Booking at ${BRAND.name} is Confirmed`,
+        emailGreeting: `Hey ${newBooking.name.split(" ")[0]},`,
+        emailBody: `You're booked at ${BRAND.name}! Here are your appointment details:\n\n✂️ Service: ${newBooking.service.name}\n📅 Date: ${dateStr}\n⏰ Time: ${newBooking.time}\n⏱ Duration: ${newBooking.service.duration}\n💰 Total: $${newBooking.service.price}\n📍 Location: ${BRAND.address}\n\n📲 ADD TO YOUR CALENDAR (1 tap):\n${gcalUrl}\n\nSee you soon!\n— ${BRAND.name}\n📞 ${BRAND.phone}\n📸 ${BRAND.instagram}\n\nNeed to reschedule? Just text or DM us — we got you.`,
+        emailBodyHtml: `<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; max-width: 560px; margin: 0 auto; background: #0A0A0A; color: #F0EAD6; padding: 32px 24px; border-radius: 12px;">
+          <div style="text-align: center; margin-bottom: 24px;">
+            <div style="font-size: 40px; margin-bottom: 8px;">💈</div>
+            <div style="color: #C8A96E; letter-spacing: 0.3em; font-size: 11px; font-weight: 700;">${BRAND.name.toUpperCase()}</div>
+          </div>
+          <h1 style="color: #F0EAD6; font-size: 24px; margin: 0 0 8px; text-align: center;">You're Booked ✓</h1>
+          <p style="color: #888; margin: 0 0 24px; text-align: center; font-size: 14px;">Hey ${newBooking.name.split(" ")[0]}, see you soon!</p>
+          <div style="background: #141414; border: 1px solid rgba(200,169,110,0.3); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr><td style="padding: 6px 0; color: #888; font-size: 13px;">Service</td><td style="padding: 6px 0; color: #F0EAD6; font-size: 14px; text-align: right; font-weight: 500;">${newBooking.service.name}</td></tr>
+              <tr><td style="padding: 6px 0; color: #888; font-size: 13px;">Date</td><td style="padding: 6px 0; color: #F0EAD6; font-size: 14px; text-align: right; font-weight: 500;">${dateStr}</td></tr>
+              <tr><td style="padding: 6px 0; color: #888; font-size: 13px;">Time</td><td style="padding: 6px 0; color: #F0EAD6; font-size: 14px; text-align: right; font-weight: 500;">${newBooking.time}</td></tr>
+              <tr><td style="padding: 6px 0; color: #888; font-size: 13px;">Duration</td><td style="padding: 6px 0; color: #F0EAD6; font-size: 14px; text-align: right; font-weight: 500;">${newBooking.service.duration}</td></tr>
+              <tr><td style="padding: 6px 0; color: #888; font-size: 13px;">Location</td><td style="padding: 6px 0; color: #F0EAD6; font-size: 14px; text-align: right; font-weight: 500;">${BRAND.address}</td></tr>
+              <tr><td style="padding: 10px 0 0; color: #C8A96E; font-size: 13px; border-top: 1px solid #2A2A2A;">Total</td><td style="padding: 10px 0 0; color: #C8A96E; font-size: 18px; text-align: right; font-weight: 700; border-top: 1px solid #2A2A2A;">$${newBooking.service.price}</td></tr>
+            </table>
+          </div>
+          <div style="text-align: center; margin-bottom: 24px;">
+            <a href="${gcalUrl}" style="display: inline-block; background: linear-gradient(135deg, #C8A96E, #8B6914); color: #0A0A0A; text-decoration: none; padding: 14px 32px; border-radius: 10px; font-weight: 700; font-size: 15px; letter-spacing: 0.03em;">📅 Add to My Calendar</a>
+          </div>
+          <div style="color: #888; font-size: 12px; text-align: center; line-height: 1.6; padding-top: 20px; border-top: 1px solid #2A2A2A;">
+            Need to reschedule? Just text or DM us — we got you.<br>
+            📞 ${BRAND.phone} · 📸 ${BRAND.instagram}
+          </div>
+        </div>`,
+      }),
+    });
+  } catch (e) {
+    console.error("Notification failed:", e);
+    // Booking still saved locally, don't block the client
+  }
+
+  state.confirmed = newBooking;
+  state.view = "confirm";
+  render();
+  window.scrollTo(0, 0);
+}
+async function deleteBooking(id) {
+  if (!confirm("Delete this booking?")) return;
+  // Delete from JSONBin
+  const latestData = await fetchData();
+  const filtered = latestData.bookings.filter(b => b.id !== id);
+  await saveData(filtered, latestData.availability);
+  state.allBookings = filtered;
+  state.availability = latestData.availability;
+  // Also clean local backup
+  const localList = loadBookings().filter(b => b.id !== id);
+  saveBookings(localList);
+  render();
+}
+function resetAll() {
+  state = { view: "landing", step: 1, booking: { service: null, date: "", time: "", name: "", phone: "", email: "", notes: "" }, confirmed: null };
+  render();
+}
+
+function addToCalendar() {
+  const b = state.confirmed;
+  if (!b) return;
+
+  // Parse duration to minutes
+  const durStr = b.service.duration;
+  let mins = 60;
+  const hrMatch = durStr.match(/(\d+)\s*hr/);
+  const minMatch = durStr.match(/(\d+)\s*min/);
+  if (hrMatch) mins = parseInt(hrMatch[1]) * 60;
+  if (minMatch) mins += parseInt(minMatch[1]);
+
+  // Parse time (e.g., "2:00 PM")
+  const [timeStr, meridiem] = b.time.split(" ");
+  let [hours, minutes] = timeStr.split(":").map(Number);
+  if (meridiem === "PM" && hours !== 12) hours += 12;
+  if (meridiem === "AM" && hours === 12) hours = 0;
+
+  // Build start/end dates
+  const startDate = new Date(b.date + "T00:00:00");
+  startDate.setHours(hours, minutes, 0, 0);
+  const endDate = new Date(startDate.getTime() + mins * 60000);
+
+  const fmt = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const uid = "tlsb-" + b.id + "@thelastshearbender.netlify.app";
+
+  const ics = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//The Last Shear Bender//Booking//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    "BEGIN:VEVENT",
+    `UID:${uid}`,
+    `DTSTAMP:${fmt(new Date())}`,
+    `DTSTART:${fmt(startDate)}`,
+    `DTEND:${fmt(endDate)}`,
+    `SUMMARY:✂️ ${b.service.name} at ${BRAND.name}`,
+    `DESCRIPTION:Your appointment at ${BRAND.name}\\n\\nService: ${b.service.name}\\nPrice: $${b.service.price}\\nPhone: ${BRAND.phone}\\n\\nBooked as: ${b.name}`,
+    `LOCATION:${BRAND.address}`,
+    "BEGIN:VALARM",
+    "TRIGGER:-PT1H",
+    "ACTION:DISPLAY",
+    "DESCRIPTION:Reminder: haircut in 1 hour",
+    "END:VALARM",
+    "BEGIN:VALARM",
+    "TRIGGER:-P1D",
+    "ACTION:DISPLAY",
+    "DESCRIPTION:Reminder: haircut tomorrow",
+    "END:VALARM",
+    "END:VEVENT",
+    "END:VCALENDAR"
+  ].join("\r\n");
+
+  const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `shear-bender-${b.date}.ics`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+// Init
+render();
+</script>
+</body>
+</html>
